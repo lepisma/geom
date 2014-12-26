@@ -1,18 +1,17 @@
 # geom
 
-A Quil sketch designed to ... well, that part is up to you.
+An attempt at making an audio visualizer using [quil](https://github.com/quil/quil) and [minim](https://github.com/ddf/Minim).
 
 ## Usage
 
-LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
+The main sketch is `geom.core` and can be run by lein
 
-Emacs - run cider, open `core.clj` and press `C-c C-k` to evaluate the file.
-
-REPL - run `(require 'geom.core)`.
+```clojure
+lein run
+```
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Abhinav Tushar
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License version 1.0.
