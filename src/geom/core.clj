@@ -1,49 +1,26 @@
 (ns geom.core
-  (:require [quil.core :as q]
-            [quil.middleware :as m]))
+  (:require [quil.core :as q]))
 
 (defn setup []
-  ; Set frame rate to 30 frames per second.
-  (q/frame-rate 30)
-  ; Set color mode to HSB (HSV) instead of default RGB.
-  (q/color-mode :hsb)
-  ; setup function returns initial state. It contains
-  ; circle color and position.
-  {:color 0
-   :angle 0})
+  ; The sample from quil main repo
+  (q/frame-rate 1)
+  (q/smooth)
+  (q/background 200))
 
-(defn update [state]
-  ; Update sketch state by changing circle color and position.
-  {:color (mod (+ (:color state) 0.7) 255)
-   :angle (+ (:angle state) 0.1)})
+(defn draw []
+  (q/stroke (q/random 255))
+  (q/stroke-weight (q/random 10))
+  (q/fill (q/random 255))
 
-(defn draw [state]
-  ; Clear the sketch by filling it with light-grey color.
-  (q/background 240)
-  ; Set circle color.
-  (q/fill (:color state) 255 255)
-  ; Calculate x and y coordinates of the circle.
-  (let [angle (:angle state)
-        x (* 150 (q/cos angle))
-        y (* 150 (q/sin angle))]
-    ; Move origin point to the center of the sketch.
-    (q/with-translation [(/ (q/width) 2)
-                         (/ (q/height) 2)]
-      ; Draw the circle.
-      (q/ellipse x y 100 100))))
+  (let [diam (q/random 100)
+        x    (q/random (q/width))
+        y    (q/random (q/height))]
+    (q/ellipse x y diam diam)))
 
 (q/defsketch geom
-  :title "You spin my circle right round"
-  :size [500 500]
-  ; setup function called only once, during sketch initialization.
+  :title "quil test"
+  :size [500 300]
   :setup setup
-  ; update is called on each iteration before draw is called.
-  ; It updates sketch state.
-  :update update
-  :draw draw
-  ; This sketch uses functional-mode middleware.
-  ; Check quil wiki for more info about middlewares and particularly
-  ; fun-mode.
-  :middleware [m/fun-mode])
+  :draw draw)
 
 (defn -main [& args])
